@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>FlowQUIZ</title>
+<style>
+  :root{
+    --bg:#0c0b13;
+    --card:#1a1725;
+    --muted:#e6e0ff;
+    --accent:#8a2be2; /* fioletowy akcent */
+    --hover:#3a2750;
+    --correct:#1f8a3b;
+    --wrong:#9a1d1d;
+    --btn:#5a00b8;
+  }
+  html,body{height:100%;margin:0;}
+  body{
+    background:linear-gradient(180deg,var(--bg),#06050a);
+    color:var(--muted);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .wrap{width:100%;max-width:720px;}
+  .card{
+    background:var(--card);
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 6px 24px rgba(0,0,0,0.6);
+    border:1px solid rgba(138,43,226,0.07);
+  }
+  h1{margin:0 0 12px 0;color:var(--accent);font-size:28px;}
+  .small{font-size:14px;color:rgba(230,224,255,0.8);}
+  .question{font-size:20px;margin:16px 0 12px;}
+  .answers{display:flex;flex-direction:column;gap:10px;margin-bottom:14px;}
+  .ans{
+    background:#2a2336;
+    padding:12px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    text-align:left;
+    border:1px solid rgba(255,255,255,0.03);
+    transition:transform .08s, background .12s;
+    user-select:none;
+  }
+  .ans:hover{background:var(--hover); transform:translateY(-2px);}
+  .ans.correct{background:var(--correct); color:white; border-color: rgba(0,0,0,0.2);}
+  .ans.wrong{background:var(--wrong); color:white; border-color: rgba(0,0,0,0.2);}
+  .btn{background:var(--btn); color:white; padding:10px 14px; border-radius:10px; border:0; cursor:pointer; font-weight:600;}
+  .muted{color:rgba(230,224,255,0.7); font-size:13px;}
+  .footer{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:12px;}
+  input[type="text"]{width:100%;padding:10px;border-radius:8px;border:0;background:#241f33;color:var(--muted);outline:none;font-size:16px}
+  @media (max-width:480px){ .wrap{padding:8px} h1{font-size:22px} .question{font-size:18px} }
+</style>
+<!-- Reżyseria: używamy React CDN żeby logika była prosta i szybka -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <div class="card" id="root"></div>
+</div>
+
+<script>
+/* --- Dane pytań (możesz je edytować) --- */
+const QUESTIONS = [
+  { q: "W którym roku wyszło GTA San Andreas?", a: ["2001","2004","2008","1999"], correct: 1 },
+  { q: "Jaka firma stworzyła Mario?", a: ["SEGA","Nintendo","Sony","Sega/ Nintendo"], correct: 1 },
+  { q: "Pierwsza konsola PlayStation pojawiła się w:", a: ["1994","1998","2000","2002"], correct: 0 },
+  { q: "Ile żyć ma Mario domyślnie w klasycznym Super Mario Bros?", a: ["1","3","5","10"], correct: 1 },
+  { q: "Która gra zapoczątkowała serię The Elder Scrolls?", a: ["Oblivion","Arena","Daggerfall","Morrowind"], correct: 1 },
+  { q: "W której grze pojawia się Gordon Fre
